@@ -3,14 +3,15 @@
     src: url("resources/Casino3DLinesMarquee.ttf") format("truetype");
 }
 body {
+
     background-color: seagreen;
     color: beige;
 
 }
 h1 {
     color: #f5f5f1;
-    font-family: Casino, Arial;
-    font-size: 80px;
+    font-family: Casino;
+    font-size: 90px;
     text-align: center;
 
 }
@@ -26,10 +27,12 @@ table {
     width: 50%;
     padding-right: 90px;
 }
-th{
+ th {
+    font-size: 35px;
+     font-weight: bolder    ;
     text-align: center;
 }
-td {
+ td {
     text-align: center;
 }
 .cards {
@@ -45,7 +48,7 @@ td {
     width:150px;
     height: 250px;
     background-color: antiquewhite;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 button{
 
@@ -63,4 +66,6 @@ button{
 #playingButtons {
     width: 100%;
 }
-
+#pScore, #pcScore {
+    font-size: 40px;
+}
