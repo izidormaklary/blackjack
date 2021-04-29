@@ -6,10 +6,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-<h1> BlackJack</h1>
+<h1 id="heading"> BlackJack</h1>
 <table>
     <tr>
         <th>
@@ -35,9 +36,23 @@
 
         </td>
     </tr>
+    <tr id="buttons">
+        <td colspan="2">
+            <button type="button" id="start" >start</button>
+        </td>
+
+    </tr>
+    <tr id="playingButtons" >
+        <td>
+            <button type="button" id="newcard" >get card</button>
+        </td>
+        <td>
+            <button type="button" id="stall">stall</button>
+        </td>
+    </tr>
 </table>
-<button type="button" id="start" >start</button>
-<button type="button" id="newcard" >get</button>
+
+
 <script src="./script.js"></script>
 </body>
 </html>
