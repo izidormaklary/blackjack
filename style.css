@@ -1,0 +1,66 @@
+@font-face {
+    font-family: "Casino";
+    src: url("resources/Casino3DLinesMarquee.ttf") format("truetype");
+}
+body {
+    background-color: seagreen;
+    color: beige;
+
+}
+h1 {
+    color: #f5f5f1;
+    font-family: Casino, Arial;
+    font-size: 80px;
+    text-align: center;
+
+}
+table {
+    width: 80%;
+    align-content: center;
+    margin: auto;
+    min-height: 600px;
+
+}
+#pcCards, #pCards{
+    height: 300px ;
+    width: 50%;
+    padding-right: 90px;
+}
+th{
+    text-align: center;
+}
+td {
+    text-align: center;
+}
+.cards {
+
+    box-shadow: 0px 1px 2px #181818;
+    display: inline-block;
+    margin: 20px;
+    margin-right: -70px;
+    vertical-align: center;
+    font-size: 40px ;
+    text-align: center;
+    color: #181818;
+    width:150px;
+    height: 250px;
+    background-color: antiquewhite;
+    border-radius: 20px;
+}
+button{
+
+    width: 80%;
+    background-color: #2e5c28; /* Green */
+    border: none;
+    color: antiquewhite;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+}
+#playingButtons {
+    width: 100%;
+}
+
