@@ -10,12 +10,15 @@
     const playingButtons = document.getElementById("playingButtons");
     const heading = document.getElementById("heading");
     playingButtons.style.display= "none";
+    let scorePlayer = 0;
+    let scorePC = 0;
+
     function givePlayerCard() {
         playerHand.push(playingDeck.pop());
-        if(playerHand[playerHand.length-1].value === "A" && playerScore.innerHTML + playerHand[playerHand.length-1].weight > 21 ){
+        if(playerHand[playerHand.length-1].value === "A" && scorePlayer + playerHand[playerHand.length-1].weight > 21 ){
             playerHand[playerHand.length-1].weight = 1;
         }
-        playerScore.innerHTML = parseInt(playerScore.innerHTML) + playerHand[playerHand.length-1].weight;
+        scorePlayer = scorePlayer + playerHand[playerHand.length-1].weight;
         let imgLink;
         switch (playerHand[playerHand.length-1].suits){
             case 'H': imgLink="resources/h.png"
@@ -26,17 +29,16 @@
                 break;
             case 'S': imgLink="resources/s.png"
                 break;
-
-
         }
+        playerScore.innerHTML = scorePlayer;
         pCards.innerHTML = pCards.innerHTML +'<div class="cards"> <h2>'+ playerHand[playerHand.length-1].value + '</h2> <img src="'+ imgLink + '" alt="' + playerHand[playerHand.length-1].suits + '" width="35" height="35"> </div>';
     }
     function giveComputerCard() {
         pcHand.push(playingDeck.pop());
-        if(pcHand[pcHand.length-1].value === "A" && pcScore.innerHTML + pcHand[pcHand.length-1].weight > 21 ){
+        if(pcHand[pcHand.length-1].value === "A" && scorePC + pcHand[pcHand.length-1].weight > 21 ){
             pcHand[pcHand.length-1].weight = 1;
         }
-        pcScore.innerHTML = parseInt(pcScore.innerHTML) + pcHand[pcHand.length-1].weight;
+        scorePC = scorePC + pcHand[pcHand.length-1].weight;
         let imgLink;
         switch (pcHand[pcHand.length-1].suits){
             case 'H': imgLink="resources/h.png"
@@ -47,10 +49,9 @@
                 break;
             case 'S': imgLink="resources/s.png"
                 break;
-
-
-        }
-        pcCards.innerHTML = pcCards.innerHTML +'<div class="cards"> <h2>'+ pcHand[pcHand.length-1].value + '</h2> <img src="'+ imgLink + '" alt="' + pcHand[pcHand.length-1].suits + '" width="35" height="35"> </div>';
+            }
+            pcScore.innerHTML= scorePC;
+            pcCards.innerHTML = pcCards.innerHTML +'<div class="cards"> <h2>'+ pcHand[pcHand.length-1].value + '</h2> <img src="'+ imgLink + '" alt="' + pcHand[pcHand.length-1].suits + '" width="35" height="35"> </div>';
     }
     function createDeck() {
         let suits = ['H', 'C', 'D', 'S'];
@@ -76,10 +77,15 @@
         }
     }
     function startGame() {
+        scorePlayer = 0;
+        scorePC = 0;
+        playerHand = [];
+        pcHand = [];
+        heading.innerHTML = "...";
         playingDeck = createDeck();
         schuffleDeck(playingDeck);
-        playerScore.innerHTML = 0;
-        pcScore.innerHTML = 0;
+
+
         pCards.innerHTML = "";
         pcCards.innerHTML= "";
         for (i = 0; i < 4; i++){
@@ -101,30 +107,82 @@
 
 
     }
+    function youWon(){
+        heading.innerHTML = "You won!";
+        buttons.style.display= "table-row";
+        playingButtons.style.display= "none";
+    }
+    function youLost(){
+        heading.innerHTML = "You lost";
+        buttons.style.display= "table-row";
+        playingButtons.style.display= "none";
+    }
+    function Push(){
+        heading.innerHTML = "Push";
+        buttons.style.display= "table-row";
+        playingButtons.style.display= "none";
+    }
+    function blackJack(){
+        heading.innerHTML = "Blackjack for you";
+        buttons.style.display= "table-row";
+        playingButtons.style.display= "none";
+    }
+
+
 
    // get card
    function getCard(){
        givePlayerCard();
-       if (pcScore.innerHTML < 16) {
+       if (scorePC < 16) {
            giveComputerCard();
        }
-       if (playerScore.innerHTML)
-       if (pcScore.innerHTML > 21){
-           heading.innerHTML = "You won!";
+       if (scorePC === 21 || scorePlayer > 21){
+           youLost();
+       }else if (scorePlayer === 21 || scorePC > 21){
+           youWon();
        }
+    }
+
+
+    function Stall(){
+        if (scorePlayer > scorePC ) {
+            giveComputerCard();
+            Stall();
+        }else{
+            evaluate();
+        }
+    }
+
+
+    function evaluate(){
+        if (scorePlayer === scorePC) {
+            Push();
+
+        }else if (scorePlayer > 21 ){
+            youLost()
+        } else if (scorePC > 21 ){
+            youWon ();
+        } else if (scorePC === 21 ){
+            youLost();
+        }else if (scorePlayer === 21){
+            youWon();
+        }
+
     }
 
 
     const play = document.getElementById('start')
     const gimme = document.getElementById('newcard')
+    const stall = document.getElementById('stall')
     play.addEventListener("click", ev => {
         startGame();
-  
     });
     gimme.addEventListener("click", ev => {
         getCard();
   
-    })
-    stall
+    });
+    stall.addEventListener('click', ev =>{
+    Stall();
+    });
   //      console.log(myhand)
 })();
