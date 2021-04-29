@@ -4,7 +4,7 @@
 
 ##### made by Izidor Maklary with javascript
 
-work in progress.. 
-no actual outcome game result yet, come back later ;)
+working script with simplified rules
 
+link to page:
 https://izidormaklary.github.io/blackjack/
