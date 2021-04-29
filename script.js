@@ -104,9 +104,7 @@
         }
         playingButtons.style.display= "table-row";
         buttons.style.display= "none";
-
-
-
+        fastBlackJack();
     }
     function youWon(){
         heading.innerHTML = "You won!";
@@ -128,33 +126,37 @@
         buttons.style.display= "table-row";
         playingButtons.style.display= "none";
     }
+    function fastBlackJack() {
+        if (scorePC === 21) {
+            if (scorePlayer === scorePC) {
+                Push();
+            } else {
+                blackJack();
+                setTimeout(youLost, 3000);
+            }
+        }
+            if (scorePlayer === 21) {
+                blackJack();
+                setTimeout(youWon, 3000);
+
+            }
 
 
-
+    }
    // adds additional card to players hand, and to computers hand if its score is not more than 15, possible outcomes
-   function getCard(){
+   function getCard() {
        givePlayerCard();
        if (scorePC < 16) {
            giveComputerCard();
        }
-       if (scorePC === 21){
-           if (scorePlayer === scorePC){
-               Push();
-           }else{
-               blackJack();
-               setTimeout(youLost, 3000);
-           }
-
-       }else if (scorePlayer === 21) {
-          blackJack();
-          setTimeout(youWon, 3000);
-       }else if (scorePlayer > 21){
+        fastBlackJack();
+       if (scorePlayer > 21) {
            youLost()
        } else if (scorePC > 21) {
            youWon()
        }
+   }
 
-    }
 
     // player won't pull more cards, computer only if its score is lower then players
     function Stall(){
